@@ -1,0 +1,17 @@
+DRAFT - placement officer must check before sharing
+
+J01 Zentrix Software: matched, 5 eligible
+J02 Finora Tech: matched, 4 eligible
+J03 Bluepeak Systems: matched, 21 eligible
+J04 Kovai Motors: needs_review, 0 eligible
+J05 Skyline Infra: matched, 3 eligible
+J06 DataNest Analytics: needs_review, 0 eligible
+J07 Cloudcraft: matched, 13 eligible
+J08 Medilink Health: matched, 4 eligible
+J09 Chipwave Semiconductors: matched, 1 eligible
+J10 Neurolabs AI: matched, 3 eligible
+
+Eligible for no job yet:
+(Posts still in review: J04, J06. Some of these students may fit those posts.)
+27EC003 Ashwin G
+27CE002 Imran Z

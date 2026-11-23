@@ -1,0 +1,67 @@
+EVAL HARNESS AND RED-TEAM RESULTS
+Command: python test_checker.py   (offline run, fake LLM, no API key used)
+Model/live call: not included. Run 'python test_checker.py live' to add one real call.
+Eval harness = 5 posts (J01, J02, J03, J07, J06) with counts worked out by hand.
+Red team = 3 inputs (percentage cut-off, vague 'top 10 percent', post that adds a student) plus a made-up ALL.
+==================================================================
+Students loaded: 24 | posts loaded: 10
+
+DATA FILES
+  PASS students csv has 20 or more rows
+  PASS jobs csv has 8 or more posts
+  PASS cgpa is read as a number
+  PASS a row with a bad cgpa is skipped
+  PASS a missing file gives an empty list
+  PASS branch spellings are normalised
+
+EVAL HARNESS
+  PASS J01 -> matched, 5 eligible
+  PASS J02 -> matched, 4 eligible
+  PASS J03 -> matched, 21 eligible
+  PASS J07 -> matched, 13 eligible
+  PASS J06 -> needs_review, 0 eligible
+
+RED TEAM
+  PASS percentage cutoff is not turned into a cgpa
+  PASS vague top 10 percent cutoff goes to review
+  PASS post that tries to add a student adds nobody
+  PASS made up ALL without any branch phrase is removed
+
+FACT CHECKS
+  PASS a branch the post never names is removed
+  PASS the ordinary word it is not the IT branch
+  PASS a batch year not written in the post is removed
+  PASS a cgpa that is really a percentage is removed
+  PASS any branch except civil goes to review
+  PASS a backlog rule the post never states is removed
+  PASS no branches or no cgpa means needs review
+
+VALIDATOR AND FALLBACK
+  PASS is valid accepts a good reply
+  PASS is valid rejects an unknown branch
+  PASS is valid rejects cgpa above 10
+  PASS is valid rejects a summary over 12 words
+  PASS is valid rejects true as a number
+  PASS is valid rejects text instead of a dict
+  PASS a reply that is not json falls back to none
+  PASS an api error falls back to none
+  PASS it retries once and then succeeds
+  PASS it gives up after two bad replies
+  PASS a 401 error falls back to none
+  PASS quotes around the key in env are removed
+
+ELIGIBILITY
+  PASS CGPA equal to the cut-off is eligible
+  PASS one backlog too many is not eligible
+  PASS wrong batch is not eligible
+  PASS wrong branch is not eligible
+  PASS 10.0 is higher than 7.5 (number, not text)
+  PASS CGPA just below the cut-off is not eligible
+  PASS ALL accepts any branch
+  PASS no backlog limit stated means any backlogs
+  PASS no batch stated means any batch
+
+PRIVACY
+  PASS only the post is sent to the llm
+
+Passed: 44  Failed: 0
